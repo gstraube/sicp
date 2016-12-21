@@ -5,7 +5,6 @@
        (* 2 (f-rec (- n 2)))
        (* 3 (f-rec (- n 3))))))
 
-
 (define (f-tail-rec n a b c)
   (if (= n 0)
     c
