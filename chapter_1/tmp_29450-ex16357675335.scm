@@ -1,0 +1,8 @@
+﻿(define (fast-expt-iter b n)
+  (define (square x) (* x x))
+  (define (iter prod b n)
+    (cond ((= n 0) 1)
+          ((= n 1) prod)
+          ((even? n) (iter (square prod) b (/ n 2)))
+          (else (iter (* b (square prod)) b (/ (- n 1) 2)))))
+        (iter b b n))
