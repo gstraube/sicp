@@ -7,3 +7,6 @@
     1
     (* (term a)
        (product term (next a) next b))))
+
+(define (factorial n)
+  (product identity 1 inc n))
