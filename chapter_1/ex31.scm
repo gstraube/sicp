@@ -17,3 +17,11 @@
 
 (define (factorial n)
   (product-iter identity 1 inc n))
+
+(define (calc-pi n)
+  (define (term x)
+    (define y (* 2 x))
+    (* (/ y (- y 1))
+       (/ y (+ y 1))))
+  (* (/ 8 3)
+     (product-iter term 2.0 inc n)))
