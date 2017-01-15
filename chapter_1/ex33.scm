@@ -25,3 +25,13 @@
 
 (define (sum-squared-primes a b)
   (filtered-accumulate + 0 square a inc b prime?))
+
+(define (gcd a b)
+  (if (= b 0)
+    a
+    (gcd b (remainder a b))))
+
+(define (sum-relative-primes n)
+  (define (relative-prime? x)
+    (= (gcd x n) 1))
+  (filtered-accumulate + 0 identity 1 inc (- n 1) relative-prime?))
