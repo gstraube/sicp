@@ -9,9 +9,16 @@
       (/ (n i) (+ (d i) (calc (+ i 1))))))
   (calc 1))
 
+(define (cont-frac-iter n d k)
+  (define (calc i result)
+    (if (= i k)
+      result
+      (calc (+ i 1) (/ (n i) (+ (d i) result)))))
+  (calc 1 (/ (n k) (d k))))
+
 (define (find-needed-precision)
   (define (check k)
-    (if (close-enough? (cont-frac
+    (if (close-enough? (cont-frac-iter
 			 (lambda (i) 1.0)
 			 (lambda (i) 1.0) k))
       k
