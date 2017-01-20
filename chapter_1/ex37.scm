@@ -11,10 +11,10 @@
 
 (define (cont-frac-iter n d k)
   (define (calc i result)
-    (if (= i k)
+    (if (= i 0)
       result
-      (calc (+ i 1) (/ (n i) (+ (d i) result)))))
-  (calc 1 (/ (n k) (d k))))
+      (calc (- i 1) (/ (n i) (+ (d i) result)))))
+  (calc k (/ (n k) (d k))))
 
 (define (find-needed-precision)
   (define (check k)
