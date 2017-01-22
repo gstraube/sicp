@@ -5,8 +5,8 @@
   (define (try guess)
     (let ((next (f guess)))
       (if (close-enough? guess next)
-          next
-          (try next))))
+	next
+	(try next))))
   (try first-guess))
 
 (define dx 0.00001)

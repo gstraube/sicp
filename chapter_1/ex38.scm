@@ -7,6 +7,6 @@
 
 (define (tan-cf x k)
   (cont-frac-iter
-   (lambda (i) (if (= i 1) x (- (expt x 2.0))))
-   (lambda (i) (+ i (- i 1)))
-   k))
+    (lambda (i) (if (= i 1) x (- (expt x 2.0))))
+    (lambda (i) (+ i (- i 1)))
+    k))
