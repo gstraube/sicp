@@ -1,6 +1,6 @@
 # sicp
 
-Source code for the exercises from "Structure and Interpretation of Computer Programs"[1] written in the SICP compatibility language provided by DrRacket[2]
+Source code for the exercises from "Structure and Interpretation of Computer Programs" [1] written in the SICP compatibility language provided by DrRacket [2]
 
 # Links
 
