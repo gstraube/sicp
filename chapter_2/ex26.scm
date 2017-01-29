@@ -9,3 +9,6 @@
 
 (define (add n1 n2)
   (lambda (f) (lambda (x) ((n1 f) ((n2 f) x)))))
+
+(define (as-natural-number n)
+  ((n (lambda (x) (+ x 1))) 0))
