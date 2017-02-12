@@ -17,4 +17,13 @@
                                     (frame-edge2 frame))))
    frame))
 
+(define (frame-x-painter frame)
+  ((segments->painter (list
+                      (make-segment (vector-add
+                                     (frame-edge1 frame)
+                                     (frame-edge2 frame))
+                                    (frame-origin frame))
+                      (make-segment (frame-edge1 frame)
+                                    (frame-edge2 frame))))
+   frame))
 
