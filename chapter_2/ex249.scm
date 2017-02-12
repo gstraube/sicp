@@ -27,3 +27,18 @@
                                     (frame-edge2 frame))))
    frame))
 
+(define (frame-diamond-painter frame)
+  ((segments->painter (list
+                      (make-segment (vector-scale 0.5 (frame-edge1 frame))
+                                    (vector-scale 0.5 (frame-edge2 frame)))
+                      (make-segment (vector-scale 0.5 (frame-edge1 frame))
+                                    (vector-add (frame-edge1 frame)
+                                                (vector-scale 0.5 (frame-edge2 frame))))
+                      (make-segment (vector-scale 0.5 (frame-edge2 frame))
+                                    (vector-add (frame-edge2 frame)
+                                                (vector-scale 0.5 (frame-edge1 frame))))
+                      (make-segment (vector-add (frame-edge1 frame)
+                                                (vector-scale 0.5 (frame-edge2 frame)))
+                                    (vector-add (frame-edge2 frame)
+                                                (vector-scale 0.5 (frame-edge1 frame))))))
+   frame))
