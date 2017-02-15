@@ -21,7 +21,11 @@
         ((and (number? m1) (number? m2)) (* m1 m2))
         (else (list '* m1 m2))))
 
-(define (make-exponentiation base exponent) (list '** base exponent))
+(define (make-exponentiation base exponent)
+  (cond ((=number? exponent 0) 1)
+        ((=number? exponent 1) base)
+        ((and (number? base) (number? exponent)) (expt base exponent))
+        (else (list '** base exponent))))
 
 (define (sum? x)
   (and (pair? x) (eq? (car x) '+)))
