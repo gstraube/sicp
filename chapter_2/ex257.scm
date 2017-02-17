@@ -21,13 +21,19 @@
   (if (null? (cadr result))
       (car result)
       (append (list '+ (car result)) (cadr result))))
+
+(define (make-product-all all-args)
+  (define (collect-and-mult args numbers non-numbers)
+    (cond ((null? args) (list numbers non-numbers))
+          ((number? (car args)) (collect-and-mult (cdr args) (* numbers (car args)) non-numbers))
+          (else (collect-and-mult (cdr args) numbers (append non-numbers (list (car args)))))))
+  (collect-and-mult all-args 1 '()))
  
-(define (make-product m1 m2)
-  (cond ((or (=number? m1 0) (=number? m2 0)) 0)
-        ((=number? m1 1) m2)
-        ((=number? m2 1) m1)
-        ((and (number? m1) (number? m2)) (* m1 m2))
-        (else (list '* m1 m2))))
+(define (make-product m1 m2 . rest)
+  (define result (make-product-all (append (list m1 m2) rest)))
+  (cond ((null? (cadr result)) (car result))
+        ((=number? (car result) 0) 0)
+        (else (append (list '+ (car result)) (cadr result)))))
 
 (define (make-exponentiation base exponent)
   (cond ((=number? exponent 0) 1)
@@ -78,3 +84,4 @@
           (deriv (base exp) var)))
         (else
          (error "unknown expression type -- DERIV" exp))))
+
