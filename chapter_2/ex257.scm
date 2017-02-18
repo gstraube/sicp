@@ -8,13 +8,12 @@
 (define (=number? exp num)
   (and (number? exp) (= exp num)))
 
-(define (make-sum-all args)
-  (define non-zero-args (filter (lambda (x) (not (=number? x 0))) args))
+(define (make-sum-all all-args)
   (define (collect-and-sum args numbers non-numbers)
     (cond ((null? args) (list numbers non-numbers))
           ((number? (car args)) (collect-and-sum (cdr args) (+ numbers (car args)) non-numbers))
           (else (collect-and-sum (cdr args) numbers (append non-numbers (list (car args)))))))
-  (collect-and-sum non-zero-args 0 '()))
+  (collect-and-sum all-args 0 '()))
 
 (define (make-sum a1 a2 . rest)
   (define result (make-sum-all (append (list a1 a2) rest)))
@@ -84,4 +83,3 @@
           (deriv (base exp) var)))
         (else
          (error "unknown expression type -- DERIV" exp))))
-
