@@ -19,7 +19,9 @@
   (define result (make-sum-all (append (list a1 a2) rest)))
   (if (null? (cadr result))
       (car result)
-      (append (list '+ (car result)) (cadr result))))
+      (if (= (car result) 0)
+          (append (list '+) (cadr result))
+          (append (list '+ (car result)) (cadr result)))))
 
 (define (make-product-all all-args)
   (define (collect-and-mult args numbers non-numbers)
