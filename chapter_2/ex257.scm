@@ -20,7 +20,9 @@
   (if (null? (cadr result))
       (car result)
       (if (= (car result) 0)
-          (append (list '+) (cadr result))
+          (if (= (length (cadr result)) 1)
+              (caadr result)
+              (append (list '+) (cadr result)))
           (append (list '+ (car result)) (cadr result)))))
 
 (define (make-product-all all-args)
