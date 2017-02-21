@@ -15,8 +15,8 @@
           (else (collect-and-sum (cdr args) numbers (append non-numbers (list (car args)))))))
   (collect-and-sum all-args 0 '()))
 
-(define (make-sum a1 a2 . rest)
-  (define result (make-sum-all (append (list a1 a2) rest)))
+(define (make-sum a1 . rest)
+  (define result (make-sum-all (append (list a1) rest)))
   (if (null? (cadr result))
       (car result)
       (if (= (car result) 0)
@@ -49,7 +49,8 @@
 
 (define (addend s) (cadr s))
 
-(define (augend s) (caddr s))
+(define (augend s)
+  (caddr s))
 
 (define (product? x)
   (and (pair? x) (eq? (car x) '*)))
