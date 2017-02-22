@@ -36,7 +36,7 @@
   (define result (make-product-all (append (list m1 m2) rest)))
   (cond ((null? (cadr result)) (car result))
         ((=number? (car result) 0) 0)
-        (else (append (list '+ (car result)) (cadr result)))))
+        (else (append (list '* (car result)) (cadr result)))))
 
 (define (make-exponentiation base exponent)
   (cond ((=number? exponent 0) 1)
