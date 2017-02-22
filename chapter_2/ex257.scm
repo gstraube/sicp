@@ -32,8 +32,8 @@
           (else (collect-and-mult (cdr args) numbers (append non-numbers (list (car args)))))))
   (collect-and-mult all-args 1 '()))
  
-(define (make-product m1 m2 . rest)
-  (define result (make-product-all (append (list m1 m2) rest)))
+(define (make-product m1 . rest)
+  (define result (make-product-all (append (list m1) rest)))
   (cond ((null? (cadr result)) (car result))
         ((=number? (car result) 0) 0)
         (else (append (list '* (car result)) (cadr result)))))
