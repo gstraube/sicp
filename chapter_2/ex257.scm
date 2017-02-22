@@ -55,14 +55,15 @@
 (define (addend s) (cadr s))
 
 (define (augend s)
-  (caddr s))
+  (apply make-sum (cddr s)))
 
 (define (product? x)
   (and (pair? x) (eq? (car x) '*)))
 
 (define (multiplier p) (cadr p))
 
-(define (multiplicand p) (caddr p))
+(define (multiplicand p)
+  (apply make-product (cddr p)))
 
 (define (exponentiation? x)
   (and (pair? x) (eq? (car x) '**)))
