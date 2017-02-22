@@ -28,6 +28,7 @@
 (define (make-product-all all-args)
   (define (collect-and-mult args numbers non-numbers)
     (cond ((null? args) (list numbers non-numbers))
+          ((=number? (car args) 0) (list 0 '()))
           ((number? (car args)) (collect-and-mult (cdr args) (* numbers (car args)) non-numbers))
           (else (collect-and-mult (cdr args) numbers (append non-numbers (list (car args)))))))
   (collect-and-mult all-args 1 '()))
