@@ -4,19 +4,23 @@
 (define coercion-table (make-hash '()))
 
 (define (put key1 key2 value)
-  (hash-set! proc-table (append (list key1) (list key2)) value))
+  (put-proc proc-table key1 key2 value))
 
 (define (get key1 key2)
-  (if (hash-has-key? proc-table (list key1 key2))
-    (hash-ref proc-table (list key1 key2))
-    #f))
+  (get-proc proc-table key1 key2))
 
 (define (put-coercion key1 key2 value)
-  (hash-set! coercion-table (append (list key1) (list key2)) value))
+  (put-proc coercion-table key1 key2 value))
 
 (define (get-coercion key1 key2)
-  (if (hash-has-key? coercion-table (list key1 key2))
-    (hash-ref coercion-table (list key1 key2))
+  (get-proc coercion-table key1 key2))
+
+(define (put-proc hash-table key1 key2 value)
+  (hash-set! hash-table (append (list key1) (list key2)) value))
+
+(define (get-proc hash-table key1 key2)
+  (if (hash-has-key? hash-table (list key1 key2))
+    (hash-ref hash-table (list key1 key2))
     #f))
 
 (define (attach-tag type-tag contents)
@@ -255,3 +259,4 @@
 (define (equ x y) (apply-generic 'equ x y))
 (define (=zero? x) (apply-generic '=zero? x))
 (define (raise x) (apply-generic 'raise x))
+
