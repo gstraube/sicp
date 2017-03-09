@@ -11,8 +11,8 @@
 
 (define (op-vect op v1 v2)
   (make-vect
-   (op (xcor-vect v1) (xcor-vect v2))
-   (op (ycor-vect v1) (ycor-vect v2))))
+    (op (xcor-vect v1) (xcor-vect v2))
+    (op (ycor-vect v1) (ycor-vect v2))))
 
 (define (add-vect v1 v2)
   (op-vect + v1 v2))
