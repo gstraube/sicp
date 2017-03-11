@@ -237,6 +237,22 @@
   (make-complex-from-real-imag n 0))
 (put 'raise '(real) raise-real)
 
+(define (project-complex n)
+  (real-part n))
+(put 'project '(complex) project-complex)
+
+(define (project-real n)
+  (make-rational (inexact->exact (round n)) 1))
+(put 'project '(real) project-real)
+
+(define (project-rational n)
+  (numer n))
+(put 'project '(rational) project-rational)
+
+(define (project-integer n)
+  n)
+(put 'project '(integer) project-integer)
+
 (define (higher? type1 type2)
   (cond
     ((and (eq? type1 'complex) (not (eq? type2 'complex))) #t)
@@ -272,3 +288,4 @@
 (define (equ x y) (apply-generic 'equ x y))
 (define (=zero? x) (apply-generic '=zero? x))
 (define (raise x) (apply-generic 'raise x))
+(define (project x) (apply-generic 'project x))
