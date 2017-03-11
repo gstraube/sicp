@@ -22,7 +22,8 @@
     (cons type-tag contents)))
 
 (define (type-tag datum)
-  (cond ((integer? datum) 'integer)
+  (cond ((and (integer? datum) (exact? datum)) 'integer)
+        ((real? datum) 'real)
 	((pair? datum) (car datum))
 	(else (error "Bad tagged datum -- TYPE-TAG" datum))))
 
@@ -48,6 +49,24 @@
 
 (define (make-integer n)
   ((get 'make 'integer) n))
+
+(define (install-real-package)
+  (define (tag x)
+    (attach-tag 'real x))
+  (put 'add '(real real) +)
+  (put 'sub '(real real) -)
+  (put 'mul '(real real) *)
+  (put 'div '(real real) /)
+  (put 'equ '(real real) eq?)
+  (put 'exp '(real real) expt)
+  (put '=zero? '(real) zero?)
+  (put 'make 'real (lambda (x) (tag x)))
+  'done)
+
+(install-real-package)
+
+(define (make-real n)
+  ((get 'make 'real) n))
 
 (define (install-rational-package)
   (define (numer x) (car x))
@@ -211,12 +230,17 @@
 (put 'raise '(integer) raise-integer)
 
 (define (raise-rational n)
-  (make-complex-from-real-imag (* (/ (numer n) (denom n) 1.0)) 0))
+  (exact->inexact (/ (numer n) (denom n))))
 (put 'raise '(rational) raise-rational)
+
+(define (raise-real n)
+  (make-complex-from-real-imag n 0))
+(put 'raise '(real) raise-real)
 
 (define (higher? type1 type2)
   (cond
     ((and (eq? type1 'complex) (not (eq? type2 'complex))) #t)
+    ((and (eq? type1 'real) (not (eq? type2 'complex)) (not (eq? type2 'real)) #t))
     ((and (eq? type1 'rational) (eq? type2 'integer)) #t)
     (else #f)))
 
