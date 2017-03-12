@@ -23,7 +23,7 @@
 
 (define (type-tag datum)
   (cond ((and (integer? datum) (exact? datum)) 'integer)
-        ((real? datum) 'real)
+	((real? datum) 'real)
 	((pair? datum) (car datum))
 	(else (error "Bad tagged datum -- TYPE-TAG" datum))))
 
