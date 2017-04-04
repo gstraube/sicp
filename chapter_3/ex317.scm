@@ -5,11 +5,12 @@
 (define (count-pairs x)
   (define visited-pairs (mutable-set))
   (define (traverse x)
-    (cond ((or (not (mpair? x)) (set-member? visited-pairs x)) 0)
-	  (else
-	    (set-add! visited-pairs x)
-	    (+ (traverse (mcar x))
-	       (traverse (mcdr x))
-	       1))))
-  (traverse x))
-
+    (cond ((mpair? x)
+	   (set-add! visited-pairs x)
+	   (cond
+	     ((not (set-member? visited-pairs (mcar x)))
+	      (traverse (mcar x)))
+	     ((not (set-member? visited-pairs (mcdr x)))
+	      (traverse (mcdr x)))))))
+  (traverse x)
+  (set-count visited-pairs))
