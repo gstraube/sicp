@@ -6,7 +6,7 @@
   (define (empty?)
    (null? front-ptr))
   (define (dispatch m)
-   (cond ((eq? m 'empty)
+   (cond ((eq? m 'empty?)
 	  (empty?))
     (else (error "Unknown procedure"))))
   dispatch))
