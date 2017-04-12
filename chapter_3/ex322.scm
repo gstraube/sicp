@@ -22,6 +22,13 @@
    (cond ((not (empty?))
 	  (set! front-ptr (mcdr front-ptr)))
     (else (error "Queue is empty"))))
+	(define (print-queue)
+	 (define (print-list list)
+	  (cond ((not (null? list))
+		 (display (mcar list))
+		 (display " ")
+		 (print-list (mcdr list)))))
+	 (print-list front-ptr))
 (define (dispatch m)
  (cond ((eq? m 'empty?)
 	(empty?))
@@ -31,6 +38,8 @@
    (front-queue))
   ((eq? m 'delete-queue)
    (delete-queue))
+  ((eq? m 'print-queue)
+   (print-queue))
   (else (error "Unknown procedure"))))
 	dispatch))
 
@@ -45,4 +54,7 @@
 
 (define (delete-queue! queue)
  (queue 'delete-queue))
+
+(define (print-queue queue)
+ (queue 'print-queue))
 
