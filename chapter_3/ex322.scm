@@ -34,3 +34,15 @@
   (else (error "Unknown procedure"))))
 	dispatch))
 
+(define (empty? queue)
+ (queue 'empty?))
+
+(define (insert-queue! queue element)
+ ((queue 'insert-queue!) element))
+
+(define (front-queue queue)
+ (queue 'front-queue))
+
+(define (delete-queue! queue)
+ (queue 'delete-queue))
+
