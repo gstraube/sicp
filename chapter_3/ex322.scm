@@ -14,11 +14,17 @@
     (else
      (set-mcdr! rear-ptr new-pair)
      (set! rear-ptr new-pair))))
+  (define (front-queue)
+   (cond ((not (empty?))
+	  (mcar front-ptr))
+    (else (error "Queue is empty"))))
   (define (dispatch m)
    (cond ((eq? m 'empty?)
 	  (empty?))
     ((eq? m 'insert-queue!)
      insert-queue!)
+    ((eq? m 'front-queue)
+     (front-queue))
     (else (error "Unknown procedure"))))
-  dispatch))
+	dispatch))
 
