@@ -19,16 +19,19 @@
 
 (define (empty? deque)
   (null? (front-ptr deque)))
+
+(define (empty-error)
+  (error "Deque is empty"))
   
 (define (front-deque deque)
   (if (not (empty? deque))
       (mcar (front-ptr deque))
-      (error "Deque is empty")))
+      (empty-error)))
 
 (define (rear-deque deque)
   (if (not (empty? deque))
       (mcar (rear-ptr deque))
-      (error "Deque is empty")))
+      (empty-error)))
 
 (define (make-new-entry item)
   (mcons item (mcons '() '())))
@@ -74,13 +77,13 @@
   (cond ((not (empty? deque))
          (set-front-ptr! deque (get-next (front-ptr deque))))
          (set-previous! (front-ptr deque) '())
-        (else (error "Queue is empty"))))
+        (else (empty-error))))
 
 (define (rear-delete-deque! deque)
   (cond ((not (empty? deque))
          (set-rear-ptr! deque (get-previous (rear-ptr deque)))
          (set-next! (rear-ptr deque) '()))
-        (else (error "Queue is empty"))))
+        (else (empty-error))))
 
 (define (print-deque deque)
   (define (print-list list)
