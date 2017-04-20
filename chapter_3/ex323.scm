@@ -76,13 +76,15 @@
 (define (front-delete-deque! deque)
   (cond ((not (empty? deque))
          (set-front-ptr! deque (get-next (front-ptr deque))))
-         (set-previous! (front-ptr deque) '())
         (else (empty-error))))
 
 (define (rear-delete-deque! deque)
   (cond ((not (empty? deque))
-         (set-rear-ptr! deque (get-previous (rear-ptr deque)))
-         (set-next! (rear-ptr deque) '()))
+         (define previous (get-previous (rear-ptr deque)))
+         (cond ((null? previous)
+                (set-front-ptr! deque '()))
+               (else (set-next! previous '())))
+         (set-rear-ptr! deque previous))
         (else (empty-error))))
 
 (define (print-deque deque)
